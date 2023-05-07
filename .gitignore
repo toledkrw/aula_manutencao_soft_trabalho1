@@ -1,1 +1,3 @@
 /Jenkins/jenkins_home
+/resources/input/*.csv
+resources/output/*
