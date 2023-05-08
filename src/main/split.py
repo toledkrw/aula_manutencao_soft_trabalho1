@@ -21,29 +21,26 @@ def split(file_name,input_dir, output_dir, split_size = 4):
             f'{output_dir}/{file_name}/{file_name}_part_{i}.csv', index=False)
 
 
+def innerMain(input_dir, output_dir):
+    files = list(x for x in glob.glob(f'{input_dir}/*.csv') if not os.path.isdir(x))
+
+    regex = fr'{input_dir}\\'+fr'|{input_dir}/'+fr'|\.csv'
+    files = list(map(lambda x: re.sub(regex, '', x), files))
+
+    for file in files:
+        split(file, input_dir, output_dir)
+        print(file)
+
+
 def main(isTest=False):
     if not isTest:
         INPUT_DIR = 'resources/input'
         OUTPUT_DIR = 'resources/output'
 
-
-        files = list(x for x in glob.glob(f'{INPUT_DIR}/*.csv') if not os.path.isdir(x))
-
-        regex = fr'{INPUT_DIR}\\|\.csv'
-        files = list(map(lambda x: re.sub(regex, '', x), files))
-
-        for file in files:
-            split(file, INPUT_DIR, OUTPUT_DIR)
-            print(file)
+        innerMain(INPUT_DIR, OUTPUT_DIR)
+        
     else:
         INPUT_DIR = 'resources/test/input'
         OUTPUT_DIR = 'resources/test/output'
-        
-        files = list(x for x in glob.glob(f'{INPUT_DIR}/*.csv') if not os.path.isdir(x))
 
-        regex = fr'{INPUT_DIR}\\|\.csv'
-        files = list(map(lambda x: re.sub(regex, '', x), files))
-
-        for file in files:
-            split(file, INPUT_DIR, OUTPUT_DIR)
-            print(file)
+        innerMain(INPUT_DIR, OUTPUT_DIR)
