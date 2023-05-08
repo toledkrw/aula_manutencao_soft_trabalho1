@@ -1,3 +1,5 @@
-/Jenkins/jenkins_home
+/jenkins_container/jenkins_home
 /resources/input/*.csv
 resources/output/*
+**__pycache__
+.pytest_cache
