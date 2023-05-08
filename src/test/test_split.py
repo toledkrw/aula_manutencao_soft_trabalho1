@@ -7,6 +7,9 @@ import src.main.split as split
 class SplitTestClass(unittest.TestCase):   
 
     def cleanUp(self):
+        if(not os.path.exists("resources/test/output/test")):
+            return
+        
         files = os.listdir("resources/test/output/test")
 
         if(len(files) > 0):
